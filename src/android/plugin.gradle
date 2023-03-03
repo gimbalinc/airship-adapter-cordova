@@ -1,0 +1,13 @@
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
+dependencies {
+  implementation 'com.gimbal.android.v4:airship-adapter:1.0.0'
+  
+  // Google Play Services
+  implementation "com.google.android.gms:play-services-location:21.0.1+"
+}
