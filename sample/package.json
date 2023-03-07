@@ -1,0 +1,33 @@
+{
+  "name": "com.gimbal.airship.cordova",
+  "displayName": "Gimbal Airship Adapter Sample",
+  "version": "1.0.0",
+  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ecosystem:cordova"
+  ],
+  "author": "Apache Cordova Team",
+  "license": "Apache-2.0",
+  "cordova": {
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "plugins": {
+      "cordova-plugin-device": {},
+      "cordova-plugin-gimbal-airship-adapter": {},
+      "urbanairship-cordova": {}
+    }
+  },
+  "devDependencies": {
+    "cordova-android": "^11.0.0",
+    "cordova-ios": "^6.2.0",
+    "cordova-plugin-device": "^2.1.0",
+    "cordova-plugin-gimbal-airship-adapter": "file:..",
+    "urbanairship-cordova": "https://gitpkg.now.sh/urbanairship/urbanairship-cordova/urbanairship-cordova?afd2d9fa902519419c8d78ae3f6d057b42067b02"
+  }
+}

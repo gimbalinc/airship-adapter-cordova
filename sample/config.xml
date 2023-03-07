@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.gimbal.airship.cordova" version="1.0.0"
+        android-packageName="com.gimbal.airship.cordova.android"
+        ios-CFBundleIdentifier="com.gimbal.airship.cordova.ios"
+        xmlns="http://www.w3.org/ns/widgets"
+        xmlns:cdv="http://cordova.apache.org/ns/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>Gimbal Airship Adapter Sample</name>
+    <description>Sample Apache Cordova App</description>
+    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
+        Apache Cordova Team
+    </author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+
+    <preference name="com.urbanairship.development_app_key" value="airship-app-key" />
+    <preference name="com.urbanairship.development_app_secret" value="airship-app-secret" />
+    <preference name="com.urbanairship.gcm_sender" value="sender:firebase-sender-id" />
+    <preference name="com.urbanairship.enable_push_onlaunch" value="true" />
+
+    
+    <preference name="com.gimbal.api_key.android" value="your Gimbal Android API key" />
+    <preference name="com.gimbal.api_key.ios" value="your Gimbal iOS API key" />
+    <preference name="com.gimbal.auto_start" value="true" />
+    <preference name="com.gimbal.track_custom_events.entry" value="true" />
+    <preference name="com.gimbal.track_custom_events.exit" value="true" />
+
+    <preference name="AndroidXEnabled" value="true" />
+
+    <platform name="android">
+        <resource-file src="google-services.json" target="app/google-services.json" />
+        <hook type="before_build" src="scripts/android-before-build.js" />
+        <config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+        </config-file>
+    </platform>
+</widget>
