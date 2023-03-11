@@ -16,6 +16,7 @@
 
     <engines>
         <engine name="cordova-android" version=">=11.0.0" />
+        <engine name="cordova-ios" version=">=6.2.0" />
     </engines>
 
 	<platform name="android">
@@ -34,4 +35,23 @@
 
 		<framework custom="true" src="src/android/plugin.gradle" type="gradleReference"/>
 	</platform>
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AirshipAdapter">
+                <param name="ios-package" value="com.gimbal.airship.AirshipAdapterPlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/AirshipAdapterPlugin.h" />
+        <source-file src="src/ios/AirshipAdapterPlugin.m" />
+        
+        <podspec>
+            <config>
+                <source url="https://cdn.cocoapods.org"/>
+            </config>
+            <pods use-frameworks="true">
+              <pod name="GimbalAirshipAdapter" spec="2.0.0"/>
+            </pods>
+        </podspec>
+    </platform>
 </plugin>
