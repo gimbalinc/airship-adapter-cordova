@@ -30,6 +30,14 @@ function onDeviceReady() {
     UAirship.setUserNotificationsEnabled(true, function (enabled) {
         console.log("User notifications are enabled! Fire away!")
     })
+    function onSuccess(position) {
+        console.log('Geolocation -- permissions requested')
+    }
+    function onError(error) {
+        console.log(`Geolocation error -- ${error.message}`)
+    }
+
+    navigator.geolocation.getCurrentPosition(onSuccess, onError)
 
     startGimbal();
 }

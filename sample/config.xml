@@ -7,9 +7,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <name>Gimbal Airship Adapter Sample</name>
-    <description>Sample Apache Cordova App</description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
-        Apache Cordova Team
+    <description>Demonstrates how to integrate Gimbal with Airship in a Cordova app</description>
+    <author email="developers@gimbal.com" href="https://infillion.com">
+        Gimbal Developers
     </author>
     <content src="index.html" />
     <allow-intent href="http://*/*" />
@@ -19,13 +19,41 @@
     <preference name="com.urbanairship.development_app_secret" value="airship-app-secret" />
     <preference name="com.urbanairship.gcm_sender" value="sender:firebase-sender-id" />
     <preference name="com.urbanairship.enable_push_onlaunch" value="true" />
-
+    
+    <preference name="com.urbanairship.ios_foreground_notification_presentation_alert" value="true"/>
+    <preference name="com.urbanairship.ios_foreground_notification_presentation_badge" value="true"/>
+    <preference name="com.urbanairship.ios_foreground_notification_presentation_sound" value="true"/>
     
     <preference name="com.gimbal.api_key.android" value="your Gimbal Android API key" />
     <preference name="com.gimbal.api_key.ios" value="your Gimbal iOS API key" />
-    <preference name="com.gimbal.auto_start" value="true" />
-    <preference name="com.gimbal.track_custom_events.entry" value="true" />
-    <preference name="com.gimbal.track_custom_events.exit" value="true" />
+    <preference name="com.gimbal.auto_start" value="true" /> <!-- default: false -->
+    <preference name="com.gimbal.track_custom_events.entry" value="true" /> <!-- default: true -->
+    <preference name="com.gimbal.track_custom_events.exit" value="true" /> <!-- default: true -->
+    <preference name="com.gimbal.track_region_events" value="false" /> <!-- default: false -->
+
+    <platform name="ios">
+        <edit-config file="*-Info.plist" target="NSLocationAlwaysUsageDescription" mode="merge">
+            <string>We require location permissions to detect place arrivals and exits</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" target="NSLocationWhenInUseUsageDescription" mode="merge">
+            <string>We require location permissions to detect place arrivals and exits</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" target="NSLocationAlwaysAndWhenInUseUsageDescription" mode="merge">
+            <string>We require location permissions to detect place arrivals and exits</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" target="NSBluetoothAlwaysUsageDescription" mode="merge">
+            <string>We require bluetooth for beacon detection</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" target="NSBluetoothPeripheralUsageDescription" mode="merge">
+            <string>We require bluetooth for beacon detection</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" target="UIBackgroundModes" mode="merge">
+            <array>
+                <string>location</string>
+                <string>processing</string>
+            </array>
+        </edit-config>
+    </platform>
 
     <preference name="AndroidXEnabled" value="true" />
 
