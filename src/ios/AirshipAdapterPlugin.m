@@ -1,4 +1,4 @@
-#import "AirshipAdapterPlugin.m"
+#import "AirshipAdapterPlugin.h"
 #import <Cordova/CDVPlugin.h>
 #import <CoreLocation/CoreLocation.h>
 
@@ -6,7 +6,7 @@
 
 -(void)pluginInitialize {
   [super pluginInitialize];
-  [AirshipAdapter restore];
+  [AirshipAdapter.shared restore];
 }
 
 -(void)start:(CDVInvokedUrlCommand *)command {
@@ -19,9 +19,9 @@
     result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                messageAsString:@"Location permission is required to start Gimbal Airship adapter"];
   } else {
-    [AirshipAdapter.shared start:[self apiKey]];
+    [AirshipAdapter.shared start:apiKey];
 
-    BOOL isStarted = [AirshipAdapter.shared.isStarted];
+    BOOL isStarted = AirshipAdapter.shared.isStarted;
     result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                  messageAsBool:isStarted];
   }
@@ -31,7 +31,7 @@
 -(void)stop:(CDVInvokedUrlCommand *)command {
   [AirshipAdapter.shared stop];
   CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-  [self.commandDelegate sendPluginResult:result];
+  [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 -(BOOL)hasActiveLocationServicesAuthorization
