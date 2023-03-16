@@ -1,7 +1,7 @@
 {
   "name": "cordova-plugin-gimbal-airship-adapter",
   "version": "0.0.1",
-  "description": "Gimbal Airship Adapter Cordova Plugin",
+  "description": "Gimbal Airship Adapter Cordova Plugin - use Gimbal PlaceEvents to trigger Airship CustomEvents",
   "cordova": {
     "id": "cordova-plugin-gimbal-airship-adapter",
     "platforms": [

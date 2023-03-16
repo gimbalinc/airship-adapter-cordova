@@ -22,12 +22,12 @@
 		<config-file parent="/*" target="res/xml/config.xml">
 			<feature name="AirshipAdapter">
 				<param name="android-package" value="com.gimbal.airship.AirshipAdapterPlugin" />
+				<param name="onload" value="true"/>
 			</feature>
 		</config-file>
 
 		<config-file parent="/*" target="AndroidManifest.xml">
-			<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-			<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+			<uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 		</config-file>
 		
 		<source-file src="src/android/AirshipAdapterPlugin.java" target-dir="src/com/gimbal/airship/" />
