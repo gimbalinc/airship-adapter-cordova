@@ -52,11 +52,13 @@
     NSString *apiKey = [command argumentAtIndex:0];
     CDVPluginResult *result;
     if (apiKey == nil) {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                   messageAsString:@"start: Expected single, non-null API Key string argument"];
-    } else if (![self hasActiveLocationServicesAuthorization]) {
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                   messageAsString:@"Location permission is required to start Gimbal Airship adapter"];
+        NSString *preferenceApiKey = [self preferenceApiKey];
+        if (preferenceApiKey == nil) {
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                       messageAsString:@"start: Expected single, non-null API Key string argument"];
+        } else {
+            [self startWithApiKey:preferenceApiKey];
+        }
     } else {
         bool isStarted = [self startWithApiKey:apiKey];
         result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
@@ -74,12 +76,6 @@
     [AirshipAdapter.shared stop];
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
--(BOOL)hasActiveLocationServicesAuthorization
-{
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    return (status == kCLAuthorizationStatusAuthorizedAlways) || (status == kCLAuthorizationStatusAuthorizedWhenInUse);
 }
 
 @end
