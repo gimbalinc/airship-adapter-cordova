@@ -51,19 +51,24 @@
 -(void)start:(CDVInvokedUrlCommand *)command {
     NSString *apiKey = [command argumentAtIndex:0];
     CDVPluginResult *result;
-    if (apiKey == nil) {
-        NSString *preferenceApiKey = [self preferenceApiKey];
-        if (preferenceApiKey == nil) {
+
+    if (apiKey == nil || apiKey.length == 0) {
+        apiKey = [self preferenceApiKey];
+        if (apiKey == nil || apiKey.length == 0) {
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
-                                       messageAsString:@"start: Expected single, non-null API Key string argument"];
+                                       messageAsString:@"start: expected non-null Gimbal API Key argument, or com.gimbal.api_key.ios preference"];
+            [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+            return;
         } else {
-            [self startWithApiKey:preferenceApiKey];
+            NSLog(@"start: Using API key from preferences");
         }
     } else {
-        bool isStarted = [self startWithApiKey:apiKey];
-        result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                     messageAsBool:isStarted];
+        NSLog(@"start: Using API key from arguments");
     }
+
+    bool isStarted = [self startWithApiKey:apiKey];
+    result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                 messageAsBool:isStarted];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
