@@ -5,7 +5,8 @@
   "cordova": {
     "id": "cordova-plugin-gimbal-airship-adapter",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "repository": {
@@ -14,8 +15,17 @@
   },
   "keywords": [
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.1": { 
+        "cordova-ios": ">=6.2.0",
+        "cordova-android": ">=11.0.0"
+      }
+    }
+  },
   "author": "Gimbal Developers",
   "license": "Apache 2.0",
   "bugs": {

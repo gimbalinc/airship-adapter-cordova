@@ -66,38 +66,29 @@ public class AirshipAdapterPlugin extends CordovaPlugin {
     }
 
     private void start(JSONArray args, CallbackContext callbackContext) {
-        String apiKey;
-
         if (args.length() != 1) {
-            callbackContext.error("Expected one nullable string Gimbal API Key argument");
+            callbackContext.error("start: expected one nullable string Gimbal API Key argument");
             return;
         }
-        if (args.optString(0, null) != null) {
-            LOG.d(TAG, "start: Using API key from arguments");
-            apiKey = args.optString(0);
-        } else {
-            LOG.d(TAG, "start: Using API key from preferences");
-            apiKey = config.getApiKey();
-        }
 
+        String apiKey = args.optString(0, null);
         if (apiKey == null || apiKey.isEmpty()) {
-            callbackContext.error("API Key must be non-null and non-empty");
+            apiKey = config.getApiKey();
+            if (apiKey == null || apiKey.isEmpty()) {
+                callbackContext.error("start: expected non-null Gimbal API Key argument, or com.gimbal.api_key.android preference");
+                return;
+            }
+            LOG.d(TAG, "start: Using API key from preferences");
+        } else {
+            LOG.d(TAG, "start: Using API key from arguments");
         }
 
         try {
-            boolean isStarted = start(apiKey);
+            boolean isStarted = getAdapter().start(apiKey);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, isStarted));
         } catch (Exception e) {
-            callbackContext.error(e.getMessage());
-        }
-    }
-
-    private boolean start(String apiKey) {
-        try {
-            return getAdapter().start(apiKey);
-        } catch (Exception e) {
             LOG.e(TAG, "start: Failed to start Gimbal Airship adapter", e);
-            throw e;
+            callbackContext.error(e.getMessage());
         }
     }
 
