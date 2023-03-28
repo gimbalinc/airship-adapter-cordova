@@ -18,12 +18,14 @@
     "cordova-android",
     "cordova-ios"
   ],
-  "engines": [
-    {
-      "name": "cordova-ios",
-      "version": ">=6.2.0"
+  "engines": {
+    "cordovaDependencies": {
+      "0.0.1": { 
+        "cordova-ios": ">=6.2.0",
+        "cordova-android": ">=11.0.0"
+      }
     }
-  ],
+  },
   "author": "Gimbal Developers",
   "license": "Apache 2.0",
   "bugs": {
