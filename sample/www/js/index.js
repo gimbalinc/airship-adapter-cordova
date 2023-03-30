@@ -22,24 +22,23 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 
 function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
-
     console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
     document.getElementById('deviceready').classList.add('ready');
 
     UAirship.setUserNotificationsEnabled(true, function (enabled) {
-        console.log("User notifications are enabled! Fire away!")
+        console.log("User notifications are enabled! Fire away!");
     })
-    function onSuccess(position) {
-        console.log('Geolocation -- permissions requested')
-    }
-    function onError(error) {
-        console.log(`Geolocation error -- ${error.message}`)
-    }
 
-    navigator.geolocation.getCurrentPosition(onSuccess, onError)
-
-    startGimbal();
+    // Requesting location will trigger the permission request dialog.  After permissions
+    // are granted, Gimbal will start.  Note that Gimbal.start() will be called on subsequent app
+    // starts, but won't have any adverse effects.
+    navigator.geolocation.getCurrentPosition(
+        (position) => {
+            console.log('Geolocation -- permissions granted, starting Gimbal');
+            startGimbal();
+        },
+        () => console.log(`Geolocation error -- ${error.message}`)
+    );
 }
 
 function startGimbal() {
@@ -50,17 +49,17 @@ function startGimbal() {
 
     var apiKey = null;
 
-    switch (device.platform) {
-        case 'iOS':
-            apiKey = 'your Gimbal iOS API key';
-            break;
-        case 'Android':
-            apiKey = 'your Gimbal Android API key';
-            break;
-        default:
-            console.log('Platform ' + device.platform + ' not supported by Gimbal SDK');
-            return;
-    }
+    // switch (device.platform) {
+    //     case 'iOS':
+    //         apiKey = 'your Gimbal iOS API key';
+    //         break;
+    //     case 'Android':
+    //         apiKey = 'your Gimbal Android API key';
+    //         break;
+    //     default:
+    //         console.log('Platform ' + device.platform + ' not supported by Gimbal SDK');
+    //         return;
+    // }
 
     Gimbal.start(apiKey,
         (started) => console.log('Running Gimbal Airship Adapter: ' + started),

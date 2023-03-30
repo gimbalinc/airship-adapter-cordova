@@ -26,7 +26,7 @@
     
     <preference name="com.gimbal.api_key.android" value="your Gimbal Android API key" />
     <preference name="com.gimbal.api_key.ios" value="your Gimbal iOS API key" />
-    <preference name="com.gimbal.auto_start" value="true" /> <!-- default: false -->
+    <preference name="com.gimbal.auto_start" value="false" /> <!-- default: false -->
     <preference name="com.gimbal.track_custom_events.entry" value="true" /> <!-- default: true -->
     <preference name="com.gimbal.track_custom_events.exit" value="true" /> <!-- default: true -->
     <preference name="com.gimbal.track_region_events" value="false" /> <!-- default: false -->
