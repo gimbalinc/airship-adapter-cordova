@@ -32,9 +32,6 @@
     <preference name="com.gimbal.track_region_events" value="false" /> <!-- default: false -->
 
     <platform name="ios">
-        <edit-config file="*-Info.plist" target="NSLocationAlwaysUsageDescription" mode="merge">
-            <string>We require location permissions to detect place arrivals and exits</string>
-        </edit-config>
         <edit-config file="*-Info.plist" target="NSLocationWhenInUseUsageDescription" mode="merge">
             <string>We require location permissions to detect place arrivals and exits</string>
         </edit-config>
@@ -42,9 +39,6 @@
             <string>We require location permissions to detect place arrivals and exits</string>
         </edit-config>
         <edit-config file="*-Info.plist" target="NSBluetoothAlwaysUsageDescription" mode="merge">
-            <string>We require bluetooth for beacon detection</string>
-        </edit-config>
-        <edit-config file="*-Info.plist" target="NSBluetoothPeripheralUsageDescription" mode="merge">
             <string>We require bluetooth for beacon detection</string>
         </edit-config>
         <edit-config file="*-Info.plist" target="UIBackgroundModes" mode="merge">
@@ -56,10 +50,8 @@
     </platform>
 
     <preference name="AndroidXEnabled" value="true" />
-
     <platform name="android">
         <resource-file src="google-services.json" target="app/google-services.json" />
-        <hook type="before_build" src="scripts/android-before-build.js" />
         <config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
         </config-file>
