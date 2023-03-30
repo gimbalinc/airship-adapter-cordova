@@ -10,6 +10,7 @@ import org.apache.cordova.LOG;
 import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class AirshipAdapterPlugin extends CordovaPlugin {
     private static final String TAG = "GIMBAL-AIRSHIP";
@@ -32,7 +33,7 @@ public class AirshipAdapterPlugin extends CordovaPlugin {
             getAdapter().setShouldTrackRegionEvent(config.getTrackRegionEvents());
 
             if (config.getAutoStart() && config.getApiKey() != null && !getAdapter().isStarted()) {
-                start(config.getApiKey());
+                getAdapter().start(config.getApiKey());
             }
         });
     }
@@ -71,30 +72,40 @@ public class AirshipAdapterPlugin extends CordovaPlugin {
             return;
         }
 
-        String apiKey = args.optString(0, null);
+        String apiKey;
+        try {
+            if (args.get(0) == JSONObject.NULL) {
+                apiKey = null;
+            } else {
+                apiKey = args.optString(0, null);
+            }
+        } catch (JSONException e) {
+            LOG.e(TAG, "Gimbal.start() got unexpected argument", e);
+            apiKey = null;
+        }
         if (apiKey == null || apiKey.isEmpty()) {
             apiKey = config.getApiKey();
             if (apiKey == null || apiKey.isEmpty()) {
                 callbackContext.error("start: expected non-null Gimbal API Key argument, or com.gimbal.api_key.android preference");
                 return;
             }
-            LOG.d(TAG, "start: Using API key from preferences");
+            LOG.d(TAG, "Gimbal.start(): Using API key from preferences");
         } else {
-            LOG.d(TAG, "start: Using API key from arguments");
+            LOG.d(TAG, "Gimbal.start(): Using API key from arguments");
         }
 
         try {
             boolean isStarted = getAdapter().start(apiKey);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, isStarted));
         } catch (Exception e) {
-            LOG.e(TAG, "start: Failed to start Gimbal Airship adapter", e);
+            LOG.e(TAG, "Gimbal.start(): Failed to start Gimbal Airship adapter", e);
             callbackContext.error(e.getMessage());
         }
     }
 
     private void stop(JSONArray args, CallbackContext callbackContext) {
         if (args.length() != 0) {
-            LOG.w(TAG, "stop: Expected no arguments");
+            LOG.w(TAG, "Gimbal.stop(): Expected no arguments");
         }
         getAdapter().stop();
         callbackContext.success();
