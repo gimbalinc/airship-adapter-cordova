@@ -207,3 +207,23 @@ Adapter can be stopped at anytime by calling:
 
 Once `stop()` is called, Gimbal location event processing will not restart upon subsequent app starts, until `start()` is called again.
 The exception is when the `auto-start` and API key preferences are set -- this behavior can't be overridden with code.
+
+## Sample app
+
+This repository includes a minimal app that configures and initializes the Airship and Gimbal SDKs.
+To get started:
+
+- in the `sample` directory, run `cordova prepare` -- this symlinks the top level of the repo to the `plugins` directory so it can be discovered
+- change the bundle/package IDs as needed in the `widget` tag in `config.xml` (`ios-CFBundleIdentifier` and `android-packageName` attributes)
+- create and add your Gimbal app API keys to `config.xml`
+- follow Airship setup as documented in [urbanairship-cordova](https://github.com/urbanairship/urbanairship-cordova#readme)
+  - `config.xml` has preferences for common Airship configuration items, including the app key and secret
+  - `google-services.json` is expected in the `sample` directory
+
+Out of the box, the app is written to start Gimbal only after permissions are granted.
+It specifies `null` as the argument to `Gimbal.start()` so that the API keys are sourced from Cordova preferences.
+Location permissions are requested as a result of the app explicitly asking for a location.
+It does not request Bluetooth, or Always Location permissions.
+
+- If you would rather specify the API keys in code, uncomment the switch block in `startGimbal()` -- this will override any keys in `config.xml`.
+- If you want to enable the auto-start feature, set the `com.gimbal.auto_start` preference to `true`.  You can then comment/remove the call to `startGimbal()` in the `getCurrentPosition()` success callback.
