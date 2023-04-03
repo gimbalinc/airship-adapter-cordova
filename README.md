@@ -6,6 +6,7 @@ The Gimbal Airship Adapter Cordova Plugin integrates Gimbal Place Event triggers
 
 - [Gimbal Developer Guide](https://gimbal.com/doc/android/v4/devguide.html)
 - [Gimbal Manager Portal](https://manager.gimbal.com)
+- [Airship Cordova Plugin](https://github.com/urbanairship/urbanairship-cordova)
 - [Airship Getting Started guide](https://docs.airship.com/platform/android/getting-started/)
 - [Airship and Gimbal Integration guide](https://docs.airship.com/partners/gimbal/)
 
@@ -16,6 +17,8 @@ The Gimbal Airship Adapter Cordova Plugin integrates Gimbal Place Event triggers
 In [Gimbal Manager > Apps](https://manager.gimbal.com/apps) create an app for each iOS and Android.
 (For the purposes of differentiating between them in analytics, it helps to make the names and bundle/package IDs unique.)
 You can find your apps' API keys in the app detail view -- you will need these later.
+
+This plugin also requires `urbanairship-cordova` plugin to be installed and configured appropriately.
 
 ### Add the plugin
 
@@ -32,6 +35,11 @@ This plugin allows configuration and setup via method calls, or via Cordova pref
 ### Start with preferences
 
 If you want to just get it started, this is for you.
+If auto-start is enabled, and the API key is set, Gimbal will start.
+Without an API key, auto-start has no effect.
+
+The downside to this approach is that Gimbal will be running *before* any permissions are granted, and may not request location updates from the OS until the next app start.
+This may result in missed place events, and missed opportunities to engage with the customer.
 
 ```xml
 <widget ...>
@@ -41,9 +49,6 @@ If you want to just get it started, this is for you.
     <preference name="com.gimbal.auto_start" value="true" />
 </widget>
 ```
-
-If auto-start is enabled, and the API key is set, Gimbal will start.
-Without an API key, auto-start has no effect.
 
 By default, Airthip Custom Event tracking is enabled for Gimbal Place Entry and Departure events.
 Airship Region Event tracking is disabled by default.
@@ -81,11 +86,11 @@ Gimbal.start(apiKey,
     () => console.log('Failed to start Gimbal Airship Adapter'));
 ```
 
-Once the adapter is started, it will automatically resume its last state when the app is restarted, including if started in the background. 
+Once the adapter is started, it will automatically resume its last state when the app is restarted, including if started in the background.
 The API key and the started status are persisted between app starts -- you only need to call `start`  once.
 
 Typically this will be called when the user has opted-in to a feature that benefits from location-triggered Airship notifications, after the appropriate permissions are granted by the user.
-It is also possible to call `start` every time in your `onDeviceReady` callback, but note that the first time that permissions are granted (*after* Gimbal is started), Gimbal will not request location updates from the OS until the next app restart.
+It is also possible to call `start` every time in your `onDeviceReady` callback, but note that the first time that permissions are granted (*after* Gimbal is started), Gimbal may not request location updates from the OS until the next app restart.
 
 NOTE: if your preferences also provide an API key and auto-start is enabled, calling `start()` may have unintended consequences.
 When `start()` is called with an API key that doesn't match the API key in preferences, the `start()` key wins.
