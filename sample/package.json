@@ -18,12 +18,12 @@
       "android"
     ],
     "plugins": {
-      "urbanairship-cordova": {},
       "cordova-plugin-device": {},
       "cordova-plugin-gimbal-airship-adapter": {},
       "cordova-plugin-geolocation": {
         "GPS_REQUIRED": "true"
-      }
+      },
+      "urbanairship-cordova": {}
     }
   },
   "devDependencies": {
@@ -32,6 +32,6 @@
     "cordova-plugin-device": "^2.1.0",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-gimbal-airship-adapter": "file:..",
-    "urbanairship-cordova": "https://gitpkg.now.sh/urbanairship/urbanairship-cordova/urbanairship-cordova?afd2d9fa902519419c8d78ae3f6d057b42067b02"
+    "urbanairship-cordova": "^14.9.1"
   }
 }

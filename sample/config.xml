@@ -32,6 +32,7 @@
     <preference name="com.gimbal.track_region_events" value="false" /> <!-- default: false -->
 
     <platform name="ios">
+        <preference name="deployment-target" value="13.0" />
         <edit-config file="*-Info.plist" target="NSLocationWhenInUseUsageDescription" mode="merge">
             <string>We require location permissions to detect place arrivals and exits</string>
         </edit-config>
@@ -49,8 +50,8 @@
         </edit-config>
     </platform>
 
-    <preference name="AndroidXEnabled" value="true" />
     <platform name="android">
+        <preference name="AndroidXEnabled" value="true" />
         <resource-file src="google-services.json" target="app/google-services.json" />
         <config-file after="uses-permission" parent="/manifest" target="AndroidManifest.xml">
             <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
