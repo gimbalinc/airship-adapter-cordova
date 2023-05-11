@@ -15,17 +15,17 @@
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 
-    <preference name="com.urbanairship.development_app_key" value="airship-app-key" />
-    <preference name="com.urbanairship.development_app_secret" value="airship-app-secret" />
+    <preference name="com.urbanairship.development_app_key" value="YOUR_APP_KEY" />
+    <preference name="com.urbanairship.development_app_secret" value="YOUR_APP_SECRET" />
     <preference name="com.urbanairship.gcm_sender" value="sender:firebase-sender-id" />
-    <preference name="com.urbanairship.enable_push_onlaunch" value="true" />
+    <preference name="com.urbanairship.enable_push_onlaunch" value="false" />
     
     <preference name="com.urbanairship.ios_foreground_notification_presentation_alert" value="true"/>
     <preference name="com.urbanairship.ios_foreground_notification_presentation_badge" value="true"/>
     <preference name="com.urbanairship.ios_foreground_notification_presentation_sound" value="true"/>
     
     <preference name="com.gimbal.api_key.android" value="your Gimbal Android API key" />
-    <preference name="com.gimbal.api_key.ios" value="your Gimbal iOS API key" />
+    <preference name="com.gimbal.api_key.ios" value="b759f6fa-3e27-4a02-9ad8-4630847d8a8a" />
     <preference name="com.gimbal.auto_start" value="false" /> <!-- default: false -->
     <preference name="com.gimbal.track_custom_events.entry" value="true" /> <!-- default: true -->
     <preference name="com.gimbal.track_custom_events.exit" value="true" /> <!-- default: true -->
@@ -59,4 +59,5 @@
     </platform>
 
     <hook type="before_prepare" src="scripts/before-prepare-link-plugin.js" />
+    <hook type="before_prepare" src="scripts/react-prebuild.js" />
 </widget>
