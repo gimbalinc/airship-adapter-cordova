@@ -24,5 +24,26 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+        "import/extensions": [
+            "error",
+            "ignorePackages",
+            {
+              "": "never",
+              "js": "never",
+              "jsx": "never",
+              "ts": "never",
+              "tsx": "never"
+            }
+         ],
+         "no-console": "off",
+         "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }]
+    },
+    "settings": {
+        "import/resolver": {
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        }
     }
 }
