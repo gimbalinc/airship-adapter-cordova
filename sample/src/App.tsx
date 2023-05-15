@@ -1,11 +1,14 @@
 import * as React from 'react';
 import './App.css';
+import COLORS from './global/colors';
+import './global/types';
+import './index.css';
 
 export default function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
+        <p style={{ color: COLORS.orange, fontFamily: 'BrandonText', fontWeight: 300 }}>
           Hello.
         </p>
         <a

@@ -11,3 +11,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 300;
+  src: url('../assets/fonts/BrandonText-Light.otf');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 400;
+  src: url('../assets/fonts/BrandonText-Regular.otf');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 500;
+  src: url('../assets/fonts/BrandonText-Medium.otf');
+}
+
+@font-face {
+  font-family: 'BrandonText';
+  font-weight: 700;
+  src: url('../assets/fonts/BrandonText-Bold.otf');
+}
