@@ -1,7 +1,13 @@
-import * as path from 'path';
-import { exec } from 'child_process';
-import * as fs from 'fs';
-import * as rimraf from 'rimraf';
+/* eslint-disable func-names */
+// import * as path from 'path';
+// import { exec } from 'child_process';
+// import * as fs from 'fs';
+// import * as rimraf from 'rimraf';
+
+const path = require('path');
+const { exec } = require('child_process');
+const fs = require('fs');
+const rimraf = require('rimraf');
 
 function renameOutputFolder(buildFolderPath, outputFolderPath) {
   return new Promise((resolve, reject) => {
@@ -39,17 +45,19 @@ function execPostReactBuild(buildFolderPath, outputFolderPath) {
   });
 }
 
-export default () => {
+// export default () => {
+module.exports = function () {
   const projectPath = path.resolve(process.cwd(), './node_modules/.bin/react-scripts');
   return new Promise((resolve, reject) => {
     exec(
       `${projectPath} build`,
       (error) => {
         if (error) {
-          console.error(error);
+          console.error(`react-scripts build error message: ${error.message} name: ${error.name}`);
           reject(error);
           return;
         }
+
         execPostReactBuild(path.resolve(__dirname, '../build/'), path.join(__dirname, '../www/'))
           .then((s) => {
             console.log(s);

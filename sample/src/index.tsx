@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import App from './features/app/App';
 
 declare let window: {
   cordova:any

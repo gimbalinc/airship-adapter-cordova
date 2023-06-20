@@ -58,6 +58,6 @@
         </config-file>
     </platform>
 
-    <hook type="before_prepare" src="scripts/before-prepare-link-plugin.js" />
-    <hook type="before_prepare" src="scripts/react-prebuild.js" />
+    <hook type="before_prepare" src="./scripts/before-prepare-link-plugin.js" />
+    <hook type="before_prepare" src="./scripts/react-prebuild.js" />
 </widget>

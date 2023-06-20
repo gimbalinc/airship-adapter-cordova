@@ -1,9 +1,14 @@
-import * as path from 'path';
-import {
+/* eslint-disable func-names */
+/**
+ * This hook creates the symlink to the adapter plugin to eliminate the need to call
+ * `cordova plugin add [path] --link` on a fresh install.
+ */
+const path = require('node:path');
+const {
   existsSync, lstatSync, mkdirSync, symlinkSync,
-} from 'fs';
+} = require('node:fs');
 
-export default (context) => {
+module.exports = function (context) {
   const pluginsDir = path.join(context.opts.projectRoot, 'plugins');
   const gimbalPluginDir = path.join(pluginsDir, 'cordova-plugin-gimbal-airship-adapter');
 
