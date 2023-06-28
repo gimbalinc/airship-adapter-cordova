@@ -1,8 +1,26 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import './App.css';
-import COLORS from '../../global/colors';
+import { ThemeProvider } from '@emotion/react';
+import COLORS, { theme } from '../../global/colors';
 import '../../global/types';
+import SingleButtonPage from '../../components/SingleButtonPage/SingleButtonPage';
+
+const appStyle: React.CSSProperties = {
+  backgroundColor: COLORS.dark_blue,
+  display: 'flex',
+  flexDirection: 'column',
+  height: '100vh',
+  textAlign: 'center',
+};
+
+const headerStyle: React.CSSProperties = {
+  color: COLORS.orange,
+  fontFamily: 'BrandonText',
+  fontWeight: 700,
+  maxWidth: '60vh',
+  paddingTop: '10vh',
+  textAlign: 'center',
+};
 
 export default function App(): React.ReactElement {
   function toggleGimbal(isOn: boolean) {
@@ -23,12 +41,11 @@ export default function App(): React.ReactElement {
   toggleGimbal(true);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <p style={{ color: COLORS.orange, fontFamily: 'BrandonText', fontWeight: 300 }}>
-          Gimbal Airship Adapter Sample App
-        </p>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div style={appStyle}>
+        <p style={headerStyle}>Gimbal Airship Cordova Sample App</p>
+        <SingleButtonPage pageText="testing" buttonText="buttonText" buttonCallback={() => console.log('It works!')} />
+      </div>
+    </ThemeProvider>
   );
 }
