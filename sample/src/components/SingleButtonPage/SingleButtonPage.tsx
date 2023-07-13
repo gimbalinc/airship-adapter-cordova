@@ -22,7 +22,7 @@ const descriptionStyle: React.CSSProperties = {
   fontSize: 16,
   fontWeight: 500,
   color: colors.orange,
-  maxWidth: '10vh',
+  maxWidth: '90vh',
   textAlign: 'center',
 };
 
