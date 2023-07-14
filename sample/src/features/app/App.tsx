@@ -63,6 +63,19 @@ export default function App({
     console.log(`setting adapter isOn to ${!isAdapterStarted}`);
     const newValueIsAdapterStarted = !isAdapterStarted;
     StorageService.setIsAdapterStarted(newValueIsAdapterStarted);
+    if (newValueIsAdapterStarted) {
+      GimbalAirshipAdapter.start(apiKey(), () => {
+        console.log('airshipAdapter sucessfully started');
+      }, () => {
+        console.log('airship adapted failed to start');
+      });
+    } else {
+      GimbalAirshipAdapter.stop(() => {
+        console.log('airshipAdapter sucessfully stopped');
+      }, () => {
+        console.log('airship adapted failed to stop');
+      });
+    }
     setIsAdapterStarted(!isAdapterStarted);
   };
 
