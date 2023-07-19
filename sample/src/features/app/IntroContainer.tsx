@@ -28,7 +28,8 @@ export default function IntroContainer({ onPageFinish }: IntroContainerProps): R
             pageText="Notification permission is necessary in order to receive Airship push events; if you need this functionality, please grant the permission once the prompt appears."
             buttonText="OK"
             buttonCallback={() => {
-              UAirship.setUserNotificationsEnabled(true, () => {
+              UAirship.setUserNotificationsEnabled(true, (enabled) => {
+                console.log(`UAirship.setUserNotificationsEnabled called, enabled? ${enabled}`);
                 onClick();
               });
             }}

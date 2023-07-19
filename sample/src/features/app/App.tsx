@@ -53,7 +53,7 @@ export default function App({
   const [isAdapterStarted, setIsAdapterStarted] = useState(shouldInitializeWithAdapterStarted);
 
   function apiKey(): string {
-    if (device.platform === 'iOS') {
+    if (window.cordova.platformId === 'ios') {
       return GIMBAL_API_KEY_IOS;
     }
     return GIMBAL_API_KEY_DROID;
