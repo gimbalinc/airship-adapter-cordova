@@ -50,7 +50,7 @@ This may result in missed place events, and missed opportunities to engage with 
 </widget>
 ```
 
-By default, Airthip Custom Event tracking is enabled for Gimbal Place Entry and Departure events.
+By default, Airship Custom Event tracking is enabled for Gimbal Place Entry and Departure events.
 Airship Region Event tracking is disabled by default.
 
 ### Start with code
@@ -69,19 +69,14 @@ Your code will need to determine which platform it is running on, so that it may
 ```javascript
 var apiKey = null;
 
-switch (device.platform) {
-    case 'iOS':
-        apiKey = '<YOUR_GIMBAL_IOS_API_KEY>';
-        break;
-    case 'Android':
-        apiKey = '<YOUR_GIMBAL_ANDROID_API_KEY>';
-        break;
-    default:
-        console.log('Platform ' + device.platform + ' not supported by Gimbal SDK');
-        return;
-}
+function apiKey(): string {
+    if (window.cordova.platformId === 'ios') {
+      return GIMBAL_API_KEY_IOS;
+    }
+    return GIMBAL_API_KEY_DROID;
+  }
 
-Gimbal.start(apiKey,
+Gimbal.start(apiKey(),
     (started) => console.log('Running Gimbal Airship Adapter: ' + started),
     () => console.log('Failed to start Gimbal Airship Adapter'));
 ```
@@ -135,6 +130,7 @@ If granted, Gimbal will use fine, coarse and background location permissions, as
 ```
 
 ### Android
+First, create and add your `google-services.json` to `/sample`, where it can be copied into the Android app during the build process (as defined in `config.xml`).
 
 Before the adapter is able to request location updates on Android API 23 or newer, the app must request the location permission `ACCESS_FINE_LOCATION` (and `ACCESS_COARSE_LOCATION` on Android API 31+).
 The Gimbal SDK will still operate when granted only `ACCESS_COARSE_LOCATION` but only very large, region-sized geofences will trigger geofence place entries.
@@ -208,22 +204,3 @@ Adapter can be stopped at anytime by calling:
 Once `stop()` is called, Gimbal location event processing will not restart upon subsequent app starts, until `start()` is called again.
 The exception is when the `auto-start` and API key preferences are set -- this behavior can't be overridden with code.
 
-## Sample app
-
-This repository includes a minimal app that configures and initializes the Airship and Gimbal SDKs.
-To get started:
-
-- in the `sample` directory, run `cordova prepare` -- this symlinks the top level of the repo to the `plugins` directory so it can be discovered
-- change the bundle/package IDs as needed in the `widget` tag in `config.xml` (`ios-CFBundleIdentifier` and `android-packageName` attributes)
-- create and add your Gimbal app API keys to `config.xml`
-- follow Airship setup as documented in [urbanairship-cordova](https://github.com/urbanairship/urbanairship-cordova#readme)
-  - `config.xml` has preferences for common Airship configuration items, including the app key and secret
-  - `google-services.json` is expected in the `sample` directory
-
-Out of the box, the app is written to start Gimbal only after permissions are granted.
-It specifies `null` as the argument to `Gimbal.start()` so that the API keys are sourced from Cordova preferences.
-Location permissions are requested as a result of the app explicitly asking for a location.
-It does not request Bluetooth, or Always Location permissions.
-
-- If you would rather specify the API keys in code, uncomment the switch block in `startGimbal()` -- this will override any keys in `config.xml`.
-- If you want to enable the auto-start feature, set the `com.gimbal.auto_start` preference to `true`.  You can then comment/remove the call to `startGimbal()` in the `getCurrentPosition()` success callback.
