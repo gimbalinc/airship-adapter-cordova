@@ -1,0 +1,12 @@
+{
+  "ios": {
+      "debug": {
+          "automaticProvisioning": true,
+          "developmentTeam": "YOUR_DEV_TEAM"
+      },
+      "release": {
+          "automaticProvisioning": true,
+          "developmentTeam": "YOUR_DEV_TEAM"
+      }
+  }
+}
