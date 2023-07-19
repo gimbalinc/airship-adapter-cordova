@@ -26,3 +26,4 @@ node_modules/
 /platforms/
 www/
 google-services.json
+/build
