@@ -38,7 +38,9 @@ function SingleButtonPage({
   return (
     <div style={containerStyle}>
       <p style={descriptionStyle}>{pageText}</p>
-      <Button style={buttonStyle} color="primary" variant="contained" onClick={buttonCallback}>{buttonText}</Button>
+      <Button style={buttonStyle} color="primary" variant="contained" onClick={buttonCallback}>
+        {buttonText}
+      </Button>
     </div>
   );
 }

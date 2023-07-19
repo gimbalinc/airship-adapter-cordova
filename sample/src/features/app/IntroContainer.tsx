@@ -12,7 +12,6 @@ export default function IntroContainer({ onPageFinish }: IntroContainerProps): R
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function onClick() {
-    console.log('testest onClick');
     if (currentIndex === PAGE_MAX_INDEX) {
       onPageFinish();
     } else {

@@ -4,11 +4,6 @@ import './index.css';
 import App from './features/app/App';
 import StorageService from './global/StorageService';
 
-declare let window: {
-  cordova: any
-  localStorage: any
-};
-
 const renderReactDom = () => {
   const shouldShowIntro = StorageService.shouldShowIntro();
   const isAdapterStarted = StorageService.isAdapterStarted();
