@@ -10,6 +10,7 @@ To generate the app(s) for either platform, run `cordova prepare`.
 The app(s) will then be available in the `\platform` directory, which can then be opened in the IDE of your choice, if desired.
 
 # Prerequisites
+First run `yarn install` from `/sample`. Afterward, run `platform add`, appending `ios` or `android` as an argument depending on what platform(s) you are interested in.
 
 ## Gimbal setup
 The package ID and bundle ID for the Android and iOS platform apps are defined in the `widget` tag of the `config.xml`.
@@ -19,6 +20,9 @@ Then copy the generated API keys for each app, and place them in their respectiv
 ## Airship setup
 Airship requires that you provide your App Secret and App Key, which can be done in the designated sections of the `config.xml`.
 
-## Android
+## Android setup
 For push notifications, you'll need to generate a `google-services.json` and place it in the `/sample` directory so it can be added to the Android build (as defined in `config.xml`). You'll also need to add your Firebase sender ID to the designated `preference` value in `config.xml` -- make sure the ID is prefixed with `sender`, as in `sender:12345`.
+
+## Cordova setup
+Finally, run `cordova prepare` after all necessary platform-specific changes have been made, then run the app through the Cordova CLI, or using the IDE of your choice.
 
