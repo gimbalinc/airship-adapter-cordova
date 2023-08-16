@@ -24,5 +24,5 @@ Airship requires that you provide your App Secret and App Key, which can be done
 For push notifications, you'll need to generate a `google-services.json` and place it in the `/sample` directory so it can be added to the Android build (as defined in `config.xml`). You'll also need to add your Firebase sender ID to the designated `preference` value in `config.xml` -- make sure the ID is prefixed with `sender`, as in `sender:12345`.
 
 ## Cordova setup
-Finally, run `cordova prepare` after all necessary platform-specific changes have been made, then run the app through the Cordova CLI, or using the IDE of your choice.
+Finally, run `cordova prepare` after all necessary platform-specific changes have been made, then run the app through the Cordova CLI, or using the IDE of your choice. Note that any code changes must be followed by `cordova prepare` in order to produce a build that incorporates those changes.
 
