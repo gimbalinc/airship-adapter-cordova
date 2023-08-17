@@ -50,7 +50,7 @@ This may result in missed place events, and missed opportunities to engage with 
 </widget>
 ```
 
-By default, Airthip Custom Event tracking is enabled for Gimbal Place Entry and Departure events.
+By default, Airship Custom Event tracking is enabled for Gimbal Place Entry and Departure events.
 Airship Region Event tracking is disabled by default.
 
 ### Start with code
@@ -69,19 +69,14 @@ Your code will need to determine which platform it is running on, so that it may
 ```javascript
 var apiKey = null;
 
-switch (device.platform) {
-    case 'iOS':
-        apiKey = '<YOUR_GIMBAL_IOS_API_KEY>';
-        break;
-    case 'Android':
-        apiKey = '<YOUR_GIMBAL_ANDROID_API_KEY>';
-        break;
-    default:
-        console.log('Platform ' + device.platform + ' not supported by Gimbal SDK');
-        return;
-}
+function apiKey(): string {
+    if (window.cordova.platformId === 'ios') {
+      return GIMBAL_API_KEY_IOS;
+    }
+    return GIMBAL_API_KEY_DROID;
+  }
 
-Gimbal.start(apiKey,
+Gimbal.start(apiKey(),
     (started) => console.log('Running Gimbal Airship Adapter: ' + started),
     () => console.log('Failed to start Gimbal Airship Adapter'));
 ```
@@ -135,6 +130,7 @@ If granted, Gimbal will use fine, coarse and background location permissions, as
 ```
 
 ### Android
+First, create and add your `google-services.json` to `/sample`, where it can be copied into the Android app during the build process (as defined in `config.xml`).
 
 Before the adapter is able to request location updates on Android API 23 or newer, the app must request the location permission `ACCESS_FINE_LOCATION` (and `ACCESS_COARSE_LOCATION` on Android API 31+).
 The Gimbal SDK will still operate when granted only `ACCESS_COARSE_LOCATION` but only very large, region-sized geofences will trigger geofence place entries.
@@ -207,3 +203,4 @@ Adapter can be stopped at anytime by calling:
 
 Once `stop()` is called, Gimbal location event processing will not restart upon subsequent app starts, until `start()` is called again.
 The exception is when the `auto-start` and API key preferences are set -- this behavior can't be overridden with code.
+
